@@ -1,0 +1,42 @@
+body
+{
+    text-align: center;
+    background-color: black;
+}
+a{
+    color:black;
+    font-weight: 600;
+    
+}
+.box-card
+{
+    text-align: center;
+    border-color: black;
+}
+.card
+{
+    display: inline-flex;
+    width: 100px;
+    align-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: gainsboro;
+    border-radius: 32px;
+    margin: 5px;
+
+}
+p
+{
+    font-weight: bold;
+}
+h1
+{   
+    font-size: xx-large;
+    font-weight: bold;
+    color: gold;
+}
+.card-text
+{
+    background-color: black;
+    color: gold;
+}
