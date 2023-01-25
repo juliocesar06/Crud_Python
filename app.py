@@ -1,5 +1,6 @@
-from flask import Flask,render_template,url_for,request,redirect
+from flask import Flask,render_template,url_for,request,redirect,jsonify
 from flask_sqlalchemy import SQLAlchemy
+
 
 # instanciando flask
 app = Flask(__name__)
@@ -7,6 +8,10 @@ app = Flask(__name__)
 # criando banco de dados 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.sqlite'
 db = SQLAlchemy(app)
+
+
+
+
 
 #tabela db
 class  Cards(db.Model):
@@ -29,7 +34,8 @@ class  Cards(db.Model):
 @app.route('/')
 def index():
     c = Cards.query.all()
-    return render_template('index.html',cards=c)
+    indice = 0
+    return render_template('index.html',cards=c,indice=indice)
 
 
 @app.route('/add',methods=['GET','POST'])
@@ -61,6 +67,8 @@ def delete(id):
     db.session.delete(c)
     db.session.commit()
     return redirect(url_for('index'))
+
+
 @app.route('/edit/<int:id>',methods=['GET','POST'])
 def edit(id):
     c = Cards.query.get(id)
@@ -76,10 +84,15 @@ def edit(id):
         print('get')
     return render_template('edit.html',cards=c)
 
+@app.route('/onclick', methods=['POST'])
+def onclick():
+    # lógica do evento
+    return 'alert("hello")'
+
 
 if __name__=='__main__':
     
     with app.app_context():
         db.create_all()
-    app.run(debug=True )
+    app.run(debug=True)
     

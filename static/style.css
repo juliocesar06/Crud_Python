@@ -3,6 +3,18 @@ body
     text-align: center;
     background-color: black;
 }
+.img
+{
+    display: inline-flex;
+    width:270px;
+    height: 250px;
+    align-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: gainsboro;
+    border-radius: 32px;
+    margin: 5px;   
+}
 a{
     color:black;
     font-weight: 600;

@@ -1,7 +1,10 @@
+from bs4 import BeautifulSoup
+
+
+html_doc = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,21 +15,6 @@
     <title>Cards</title>
 </head>
 <body>
-  <script>
-    function sendRequest() {
-        $.ajax({
-            url: '/onclick',
-            type: 'POST',
-            success: function (response) {
-                alert(response);
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    }
-    </script>
-
     <div class="intro">
         <h1>Champions</h1>
     </div>
@@ -34,7 +22,7 @@
   
     {%for i in cards%}
     <div class="card" style="width: 18rem;">
-        <img class="img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/{{i.nome}}_0.jpg" class="card-img-top" alt="...">
+        <img class="img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/{{i.nome}}_{{indice}}.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h2 class="card-title">{{i.nome}}</h5>
           <p class="card-text">{{i.descricao}}</p>
@@ -49,31 +37,27 @@
             <button class="btn btn-danger"><a href="/delete/{{i.id}}">Deletar</a></button>
             <button class="btn btn-warning"><a href="/edit/{{i.id}}">Update</a></button>
           </div>
-          <script>
-            function mudar()
-            {
-              let l = document.getElementsByClassName('img');
-              for (i=0; i < l.length;i++)
-              {
-                x = Math.floor(Math.random() * 3 + 0);
-                a = l[i].src;
-                a = a.replace("0",+x);
-                a = a.replace("1",+x);
-                a = a.replace("2",+x);
-                a = a.replace("3",+x);
-                l[i].src = a; 
-              }
-            }
-          </script>
+          <button class="mudar"> Mudar Skin</button>
+
         </div>
     </div>
     {%endfor%}
     </div>
-    <button onclick="mudar()" class="mudar"> Mudar Skin</button>
     <div>
-        <button  type="button" class="btn btn-info"><a href="/add">ADD</a></button>
+        <button type="button" class="btn btn-info"><a href="/add">ADD</a></button>
     </div>
    
     
 </body>
 </html>
+"""
+
+
+"""
+def mudar():
+    soup = BeautifulSoup(html_doc,'html.parser')
+    mudar = soup.find('button',class_="mudar")
+    mudar['onclick']= 'document.ElementByClassName("img").src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/{{i.nome}}_1.jpg'
+    return mudar
+    """
+
