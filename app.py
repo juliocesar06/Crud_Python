@@ -43,6 +43,7 @@ def add():
     if request.method == 'POST':
         print('POST')
         nome = request.form['nome']
+        nome = nome.capitalize()
         nome = "".join(nome.split())
         atk = request.form['atk']
         df = request.form['df']
